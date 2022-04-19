@@ -5,18 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { createStore } from "redux";
-import loginReducer from "./reducers/loginReducer";
 import { Provider } from "react-redux";
-
-const store = createStore(loginReducer);
+import store from "./store/index";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
     <App />
   </Provider>
-
   // </React.StrictMode>
 );
 
@@ -24,3 +20,10 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+function* generator(name) {
+  console.log(name);
+  yield "Enter Name";
+}
+const it = generator();
+it.next();

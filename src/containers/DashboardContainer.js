@@ -11,13 +11,14 @@ const DashboardContainer = () => {
   }, []);
 
   let userInfo = useSelector((state) => state.userInfo);
+  // console.log("dashboard+______" + userInfo);
   const getUsers = (page = 1) => {
     apiHelper("get", `users?page=${page}`)
       .then((response) => {
         console.log(response.data);
-        let userInfo = response.data.data;
-        console.log(userInfo);
-        setUser(userInfo);
+        let userList = response.data.data;
+        //  console.log(userInfo);
+        setUser(userList);
       })
       .catch((error) => {
         console.log(error);
@@ -32,12 +33,8 @@ const DashboardContainer = () => {
         <Row className="col-sm-12">
           {users.map((user) => {
             return (
-              <Col>
-                <DashboardComponent
-                  className="col-sm-3"
-                  key={user.id}
-                  user={user}
-                />
+              <Col key={user.id}>
+                <DashboardComponent className="col-sm-3" user={user} />
               </Col>
             );
           })}
