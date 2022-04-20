@@ -23,15 +23,15 @@ const LoginComponent = ({
   submitHandler,
 }) => {
   return (
-    <div>
-      Login
+    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
       <Container>
-        <Row className="align-items-center">
-          <Col sm={{ size: 6, offset: 3 }} className="text-center">
-            <Card className="d-flex">
+        <h3>Login</h3>
+        <Row>
+          <Col className="col-sm-4 offset-4">
+            <Card>
               <CardBody>
                 <Form>
-                  <FormGroup>
+                  <FormGroup style={{ textAlign: "left" }}>
                     <Label for="exampleEmail">Email</Label>
                     <Input
                       id="exampleEmail"
@@ -42,9 +42,11 @@ const LoginComponent = ({
                       onChange={setEmailWrapper}
                       invalid={emailError !== null}
                     />
-                    <FormFeedback>{emailError}</FormFeedback>
+                    <FormFeedback style={{ textAlign: "left" }}>
+                      {emailError}
+                    </FormFeedback>
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup style={{ textAlign: "left" }}>
                     <Label for="examplePassword">Password</Label>
                     <Input
                       id="examplePassword"
@@ -55,7 +57,9 @@ const LoginComponent = ({
                       onChange={setPasswordWrapper}
                       invalid={passwordError !== null}
                     />
-                    <FormFeedback>{passwordError}</FormFeedback>
+                    <FormFeedback style={{ textAlign: "left" }}>
+                      {passwordError}
+                    </FormFeedback>
                   </FormGroup>
                   <Button onClick={submitHandler} disabled={formDisabled}>
                     Submit

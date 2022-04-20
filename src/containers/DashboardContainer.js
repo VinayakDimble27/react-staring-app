@@ -28,7 +28,7 @@ const DashboardContainer = () => {
   return (
     <>
       <Container>
-        {userInfo.length > 0 && <h1>Welcome user,You have logged in</h1>}
+        {userInfo.length > 0 && <h3>Welcome user,You have logged in</h3>}
         <h3>User List</h3>
         <Row className="col-sm-12">
           {users.map((user) => {

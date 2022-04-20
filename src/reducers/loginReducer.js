@@ -1,6 +1,5 @@
 import React from "react";
-
-import { LOGIN_ACTION } from "../actions/loginActions";
+import { LOGIN_REDUCER } from "../shared/actionConstants";
 
 export const initialState = {
   email: "",
@@ -12,15 +11,17 @@ export const initialState = {
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_ACTION.SET_EMAIL:
+    case LOGIN_REDUCER.SET_EMAIL:
       return { ...state, email: action.value };
-    case LOGIN_ACTION.SET_PASSWORD:
+    case LOGIN_REDUCER.SET_PASSWORD:
       return { ...state, password: action.value };
-    case LOGIN_ACTION.SET_EMAIL_ERROR:
+    case LOGIN_REDUCER.LOGIN_REQUEST:
+      console.log("inside __login reducer");
+    case LOGIN_REDUCER.SET_EMAIL_ERROR:
       return { ...state, emailError: action.value };
-    case LOGIN_ACTION.SET_PASSWORD_ERROR:
+    case LOGIN_REDUCER.SET_PASSWORD_ERROR:
       return { ...state, passwordError: action.value };
-    case LOGIN_ACTION.SET_USER_DETAILS:
+    case LOGIN_REDUCER.SET_USER_DETAILS:
       // console.log("inside set user details");
       sessionStorage.setItem("token", action.value);
       return { ...state, userInfo: action.value };

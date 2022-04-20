@@ -1,8 +1,13 @@
 import React, { useReducer, useState } from "react";
 import LoginComponent from "../components/LoginComponent";
 import loginReducer, { initialState } from "../reducers/loginReducer";
-import { LOGIN_ACTION } from "../actions/loginActions";
-import apiHelper from "../apis/apiHelper";
+import {
+  setEmail,
+  setPassword,
+  setError,
+  loginRequest,
+} from "../actions/loginActions";
+import { LOGIN_REDUCER } from "../shared/actionConstants";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -12,11 +17,14 @@ const LoginContainer = () => {
   const { email, password, emailError, passwordError } = loginDetails;
 
   const setEmailWrapper = (e) => {
-    dispatch({ type: LOGIN_ACTION.SET_EMAIL, value: e.target.value });
+    // setEmail(e.target.value);
+    dispatch(setEmail(e.target.value));
+    //dispatch({ type: LOGIN_REDUCER.SET_EMAIL, value: e.target.value });
   };
 
   const setPasswordWrapper = (e) => {
-    dispatch({ type: LOGIN_ACTION.SET_PASSWORD, value: e.target.value });
+    dispatch(setPassword(e.target.value));
+    //dispatch({ type: LOGIN_REDUCER.SET_PASSWORD, value: e.target.value });
   };
   const [formDisabled, setFormStatus] = useState(false);
 
@@ -33,51 +41,65 @@ const LoginContainer = () => {
     schema
       .validate({ email, password }, { abortEarly: false })
       .then(() => {
+        // setError();
         dispatch({
-          type: LOGIN_ACTION.SET_EMAIL_ERROR,
+          type: LOGIN_REDUCER.SET_EMAIL_ERROR,
           value: null,
         });
         dispatch({
-          type: LOGIN_ACTION.SET_PASSWORD_ERROR,
+          type: LOGIN_REDUCER.SET_PASSWORD_ERROR,
           value: null,
         });
-        apiHelper("post", "login", {
-          email,
-          password,
-        })
-          .then((response) => {
-            console.log(response);
-            if (response.data.token) {
-              userDispatch({
-                type: LOGIN_ACTION.SET_USER_DETAILS,
-                value: response.data.token,
-              });
-              console.log("token" + response.data.token);
-              alert("success !");
-              navigate("/dashboard");
-            }
+
+        userDispatch(
+          loginRequest({
+            email,
+            password,
+            redirect: navigate,
+            path: "/dashboard",
           })
-          .catch((e) => {
-            console.log(e);
-            alert("failed !");
-          });
+        );
+
+        // apiHelper("post", "login", {
+        //   email,
+        //   password,
+        // })
+        //   .then((response) => {
+        //     //console.log(response);
+        //     if (response.data.token) {
+        //       userDispatch(setLoginDetail(response.data.token));
+        //       // userDispatch({
+        //       //   type: LOGIN_REDUCER.SET_USER_DETAILS,
+        //       //   value: response.data.token,
+        //       // });
+        //       console.log("token" + response.data.token);
+        //       alert("success !");
+        //       navigate("/dashboard");
+        //     }
+        //   })
+        //   .catch((e) => {
+        //     console.log(e);
+        //     alert("failed !");
+        //   });
         setFormStatus((prevState) => !prevState);
+        //navigate("/dashboard");
       })
       .catch((e) => {
         setFormStatus((prevState) => !prevState);
         console.log(e);
         e.inner.forEach((element) => {
-          console.log(element.path);
-          if (element.path === "email")
-            dispatch({
-              type: LOGIN_ACTION.SET_EMAIL_ERROR,
-              value: element.message,
-            });
-          if (element.path === "password")
-            dispatch({
-              type: LOGIN_ACTION.SET_PASSWORD_ERROR,
-              value: element.message,
-            });
+          // console.log(element.path);
+          dispatch(setError(element));
+          // if (element.path === "email")
+          //   dispatch({
+          //     type: LOGIN_REDUCER.SET_EMAIL_ERROR,
+          //     value: element.message,
+          //   });
+          // if (element.path === "password")
+          //   dispatch({
+          //     type: LOGIN_REDUCER.SET_PASSWORD_ERROR,
+          //     value: element.message,
+          //   });
         });
       });
   };
