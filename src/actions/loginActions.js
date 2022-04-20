@@ -16,7 +16,6 @@ export const setError = (ele) => {
 };
 
 export const setLoginDetail = (data) => {
-  console.log("in side setLoginDetail");
   return { type: LOGIN_REDUCER.SET_USER_DETAILS, value: data };
 };
 

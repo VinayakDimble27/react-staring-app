@@ -3,11 +3,11 @@ import { LOGIN_REDUCER } from "../shared/actionConstants";
 import { login } from "../apis/loginAPI";
 import { setLoginDetail } from "../actions/loginActions";
 
-function* loginSaga(action) {
+function* loginWorkerSaga(action) {
   try {
     const { email, password, redirect, path } = action.value;
     const response = yield call(login, { email, password });
-    yield put(setLoginDetail(response.data.token));
+    yield put(setLoginDetail({ token: response.data.token, email }));
     redirect(path);
   } catch (error) {
     console.log(error);
@@ -15,8 +15,7 @@ function* loginSaga(action) {
   }
 }
 
-function* userSaga() {
-  yield takeLatest(LOGIN_REDUCER.LOGIN_REQUEST, loginSaga);
+function* loginSaga() {
+  yield takeLatest(LOGIN_REDUCER.LOGIN_REQUEST, loginWorkerSaga);
 }
-
-export default userSaga;
+export default loginSaga;

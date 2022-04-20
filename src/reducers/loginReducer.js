@@ -1,4 +1,3 @@
-import React from "react";
 import { LOGIN_REDUCER } from "../shared/actionConstants";
 
 export const initialState = {
@@ -15,15 +14,15 @@ const loginReducer = (state = initialState, action) => {
       return { ...state, email: action.value };
     case LOGIN_REDUCER.SET_PASSWORD:
       return { ...state, password: action.value };
-    case LOGIN_REDUCER.LOGIN_REQUEST:
-      console.log("inside __login reducer");
+    // case LOGIN_REDUCER.LOGIN_REQUEST:
+    //   return { ...state, userInfo: action.value };
+    //   break;
     case LOGIN_REDUCER.SET_EMAIL_ERROR:
       return { ...state, emailError: action.value };
     case LOGIN_REDUCER.SET_PASSWORD_ERROR:
       return { ...state, passwordError: action.value };
     case LOGIN_REDUCER.SET_USER_DETAILS:
-      // console.log("inside set user details");
-      sessionStorage.setItem("token", action.value);
+      sessionStorage.setItem("userInfo", JSON.stringify(action.value));
       return { ...state, userInfo: action.value };
     default:
       return state;
