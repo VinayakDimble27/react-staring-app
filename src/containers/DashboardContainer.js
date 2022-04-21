@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 import DashboardComponent from "../components/DashboardComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserList } from "../actions/userActions";
+import { loginOut } from "../actions/loginActions";
+import { LOGIN_REDUCER } from "../shared/actionConstants";
 
 const DashboardContainer = () => {
   // const [users, setUser] = useState([]);
@@ -19,12 +21,18 @@ const DashboardContainer = () => {
     dispatch(getUserList());
   };
 
+  const logout = () => {
+    dispatch({ type: LOGIN_REDUCER.LOGOUT });
+  };
   return (
     <>
       <Container>
         {userInfo.token && userInfo.token.length > 0 && (
           <span>
-            Welcome <b>{userInfo.email}</b>,You have logged in
+            Welcome <b>{userInfo.email}</b>,You have logged in <br></br>
+            <Button color="warning" onClick={logout}>
+              Logout
+            </Button>
           </span>
         )}
         <h3>User List</h3>

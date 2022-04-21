@@ -22,8 +22,14 @@ const loginReducer = (state = initialState, action) => {
     case LOGIN_REDUCER.SET_PASSWORD_ERROR:
       return { ...state, passwordError: action.value };
     case LOGIN_REDUCER.SET_USER_DETAILS:
+      console.log("actions details___", JSON.stringify(action.value));
+      console.log("state details____", JSON.stringify(state));
       sessionStorage.setItem("userInfo", JSON.stringify(action.value));
       return { ...state, userInfo: action.value };
+    case LOGIN_REDUCER.LOGOUT:
+      sessionStorage.setItem("userInfo", {});
+      return { ...state, userInfo: {} };
+
     default:
       return state;
   }

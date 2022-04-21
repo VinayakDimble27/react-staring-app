@@ -42,9 +42,9 @@ const LoginComponent = ({
                       onChange={setEmailWrapper}
                       invalid={emailError !== null}
                     />
-                    {/* <FormFeedback style={{ textAlign: "left" }}>
+                    <FormFeedback style={{ textAlign: "left" }}>
                       {emailError}
-                    </FormFeedback> */}
+                    </FormFeedback>
                   </FormGroup>
                   <FormGroup style={{ textAlign: "left" }}>
                     <Label for="examplePassword">Password</Label>
@@ -57,11 +57,15 @@ const LoginComponent = ({
                       onChange={setPasswordWrapper}
                       invalid={passwordError !== null}
                     />
-                    {/* <FormFeedback style={{ textAlign: "left" }}>
+                    <FormFeedback style={{ textAlign: "left" }}>
                       {passwordError}
-                    </FormFeedback> */}
+                    </FormFeedback>
                   </FormGroup>
-                  <Button onClick={submitHandler} disabled={formDisabled}>
+                  <Button
+                    onClick={submitHandler}
+                    disabled={formDisabled}
+                    color="primary"
+                  >
                     Submit
                   </Button>
                 </Form>

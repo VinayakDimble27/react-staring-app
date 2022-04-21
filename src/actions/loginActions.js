@@ -22,6 +22,9 @@ export const setLoginDetail = (data) => {
 export const loginRequest = (data) => {
   return { type: LOGIN_REDUCER.LOGIN_REQUEST, value: data };
 };
+export const loginOut = () => {
+  return { type: LOGIN_REDUCER.LOGOUT };
+};
 
 export const loginFailed = (data) => {
   return { type: LOGIN_REDUCER.LOGIN_FAILED, value: data };

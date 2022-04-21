@@ -18,4 +18,5 @@ function* loginWorkerSaga(action) {
 function* loginSaga() {
   yield takeLatest(LOGIN_REDUCER.LOGIN_REQUEST, loginWorkerSaga);
 }
+
 export default loginSaga;
