@@ -1,7 +1,7 @@
 import { USER_REDUCER } from "../shared/actionConstants";
 
 export const userInitialState = { users: [] };
-const userReducer = (state = userInitialState, action) => {
+export const userReducer = (state = userInitialState, action) => {
   switch (action.type) {
     // case USER_REDUCER.USER_REQUEST:
 

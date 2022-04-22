@@ -10,7 +10,6 @@ const AppRoute = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginContainer />}></Route>
-
         <Route
           path="/dashboard"
           element={

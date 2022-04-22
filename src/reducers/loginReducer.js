@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import { LOGIN_REDUCER } from "../shared/actionConstants";
 
 export const initialState = {
@@ -9,7 +8,7 @@ export const initialState = {
   userInfo: {},
 };
 
-const loginReducer = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REDUCER.SET_EMAIL:
       return { ...state, email: action.value };

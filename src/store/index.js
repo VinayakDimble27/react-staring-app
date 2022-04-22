@@ -1,6 +1,4 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
-import loginReducer from "../reducers/loginReducer";
-import userReducer from "../reducers/userReducer";
 import rootReducer from "../reducers";
 import createSagaMiddleware from "redux-saga";
 import { LOGIN_REDUCER } from "../shared/actionConstants";
@@ -10,12 +8,14 @@ import rootSaga from "../sagas/rootSaga";
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-// console.log(store.getState());
+
 sagaMiddleware.run(rootSaga);
 
 let userInfo = {
-  token: null,
+  token: "",
+  email: "",
 };
+
 if (sessionStorage.userInfo) {
   userInfo = JSON.parse(sessionStorage.userInfo);
 }

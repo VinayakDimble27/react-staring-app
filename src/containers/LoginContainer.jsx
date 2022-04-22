@@ -6,7 +6,7 @@ import {
   setError,
   loginRequest,
 } from "../actions/loginActions";
-import * as yup from "yup";
+import schema from '../validation/loginValidation'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,8 +14,10 @@ const LoginContainer = () => {
   const { email, password, emailError, passwordError } = useSelector(
     (state) => state.loginReducer
   );
+  const [formDisabled, setFormStatus] = useState(false);
 
   const dispatch = useDispatch();
+
   const setEmailWrapper = (e) => {
     dispatch(setEmail(e.target.value));
   };
@@ -23,14 +25,9 @@ const LoginContainer = () => {
   const setPasswordWrapper = (e) => {
     dispatch(setPassword(e.target.value));
   };
-  const [formDisabled, setFormStatus] = useState(false);
-
-  let schema = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().min(6).required(),
-  });
 
   const navigate = useNavigate();
+  
   const submitHandler = () => {
     setFormStatus((prevState) => !prevState);
     schema
@@ -39,12 +36,12 @@ const LoginContainer = () => {
         dispatch(
           loginRequest({
             email,
-            password,
-            redirect: navigate,
-            path: "/dashboard",
+            password
           })
         );
-        setFormStatus((prevState) => !prevState);
+       
+       setFormStatus((prevState) => !prevState);
+       navigate("/dashboard");
       })
       .catch((e) => {
         setFormStatus((prevState) => !prevState);
@@ -54,6 +51,7 @@ const LoginContainer = () => {
         });
       });
   };
+  
   return (
     <LoginComponent
       email={email}

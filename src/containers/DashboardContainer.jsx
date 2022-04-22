@@ -3,13 +3,13 @@ import { Container, Row, Col, Button } from "reactstrap";
 import DashboardComponent from "../components/DashboardComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserList } from "../actions/userActions";
-import { loginOut } from "../actions/loginActions";
 import { LOGIN_REDUCER } from "../shared/actionConstants";
 import { Link } from "react-router-dom";
 
 const DashboardContainer = () => {
   // const [users, setUser] = useState([]);
   const dispatch = useDispatch();
+
   useEffect(() => {
     getUsers(1);
   }, []);

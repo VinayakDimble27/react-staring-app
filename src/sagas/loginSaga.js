@@ -3,12 +3,12 @@ import { LOGIN_REDUCER } from "../shared/actionConstants";
 import { login } from "../apis/loginAPI";
 import { setLoginDetail } from "../actions/loginActions";
 
-function* loginWorkerSaga(action) {
+export function* loginWorkerSaga(action) {
   try {
-    const { email, password, redirect, path } = action.value;
+    const { email, password } = action.value;
     const response = yield call(login, { email, password });
+    // console.log(response);
     yield put(setLoginDetail({ token: response.data.token, email }));
-    redirect(path);
   } catch (error) {
     console.log(error);
     alert("Invalid credentials");
