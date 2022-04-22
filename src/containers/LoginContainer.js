@@ -6,7 +6,6 @@ import {
   setError,
   loginRequest,
 } from "../actions/loginActions";
-import { LOGIN_REDUCER } from "../shared/actionConstants";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

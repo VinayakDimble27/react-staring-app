@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserList } from "../actions/userActions";
 import { loginOut } from "../actions/loginActions";
 import { LOGIN_REDUCER } from "../shared/actionConstants";
+import { Link } from "react-router-dom";
 
 const DashboardContainer = () => {
   // const [users, setUser] = useState([]);
@@ -30,9 +31,9 @@ const DashboardContainer = () => {
         {userInfo.token && userInfo.token.length > 0 && (
           <span>
             Welcome <b>{userInfo.email}</b>,You have logged in <br></br>
-            <Button color="warning" onClick={logout}>
+            <Link to="/" color="warning" onClick={logout}>
               Logout
-            </Button>
+            </Link>
           </span>
         )}
         <h3>User List</h3>

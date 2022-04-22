@@ -13,12 +13,14 @@ const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 // console.log(store.getState());
 sagaMiddleware.run(rootSaga);
 
-let userInfo = {};
+let userInfo = {
+  token: null,
+};
 if (sessionStorage.userInfo) {
   userInfo = JSON.parse(sessionStorage.userInfo);
 }
 
-if (userInfo.token && userInfo.token.length > 0) {
+if (userInfo && userInfo.token.length > 0) {
   store.userInfo = userInfo;
   store.dispatch({
     type: LOGIN_REDUCER.SET_USER_DETAILS,
