@@ -26,7 +26,7 @@ const LoginComponent = ({
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
       <Container>
-        <h3>Login</h3>
+        <h3 className="text-center">Login</h3>
         <Row>
           <Col className="col-sm-4 offset-4">
             <Card>

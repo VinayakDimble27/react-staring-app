@@ -6,7 +6,7 @@ import {
   setError,
   loginRequest,
 } from "../actions/loginActions";
-import schema from '../validation/loginValidation'
+import schema from "../validation/loginValidation";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,6 +14,7 @@ const LoginContainer = () => {
   const { email, password, emailError, passwordError } = useSelector(
     (state) => state.loginReducer
   );
+
   const [formDisabled, setFormStatus] = useState(false);
 
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const LoginContainer = () => {
   };
 
   const navigate = useNavigate();
-  
+
   const submitHandler = () => {
     setFormStatus((prevState) => !prevState);
     schema
@@ -36,12 +37,12 @@ const LoginContainer = () => {
         dispatch(
           loginRequest({
             email,
-            password
+            password,
           })
         );
-       
-       setFormStatus((prevState) => !prevState);
-       navigate("/dashboard");
+
+        setFormStatus((prevState) => !prevState);
+        navigate("/dashboard");
       })
       .catch((e) => {
         setFormStatus((prevState) => !prevState);
@@ -51,7 +52,7 @@ const LoginContainer = () => {
         });
       });
   };
-  
+
   return (
     <LoginComponent
       email={email}
